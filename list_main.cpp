@@ -30,6 +30,7 @@ int main()
     push_number(&list, 99, 1);
     push_first(&list, 52);
     pop_last(&list, &value);
+    pop_index(&list, &value, -1);
 
     printf("%d\n", value);
     

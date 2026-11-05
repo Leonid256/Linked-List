@@ -74,6 +74,12 @@ int search_free_index(linked_list* list)    //NOTE: относительно б�
 //----------------------------------------------------------------------------
 list_stat push_number(linked_list* list, etype_t value, int number)            //добавление элемента по порядковому номеру в связях
 {
+    if (number >= LIST_LEN || number < 0)
+    {
+        printf(RED "Error: attempt to pop by the wrong number\n" CRESET);
+        return LIST_ERROR;
+    }
+
     int i = 0;
     for (int k = 0; k < number - 1; k++)
     {
@@ -94,6 +100,11 @@ list_stat push_index(linked_list* list, etype_t value, int index)               
         printf(RED "ERROR: list is overfull. Addition is not possible\n" CRESET);
         return LIST_ERROR;
     }
+    else if (index >= LIST_LEN || index < 0)
+    {
+        printf(RED "Error: attempt to pop by the wrong index\n" CRESET);
+        return LIST_ERROR;
+    }
 
     list -> next_free = list -> next[free_i];
     list -> data[free_i] = value;
@@ -110,6 +121,17 @@ list_stat push_index(linked_list* list, etype_t value, int index)               
 //----------------------------------------------------------------------------
 list_stat pop_index(linked_list* list, etype_t* value, int index)               //удаление эл-та по индексу в массиве data
 {
+    if (index == 0)
+    {
+        printf(RED "Error: attempt to pop the first(special) element\n" CRESET);
+        return LIST_ERROR;
+    }
+    else if (index >= LIST_LEN || index < 0)
+    {
+        printf(RED "Error: attempt to pop by the wrong index\n" CRESET);
+        return LIST_ERROR;
+    }
+
     *value = list -> data[index];
 
     list -> next[list -> prev[index]] = list -> next[index];
