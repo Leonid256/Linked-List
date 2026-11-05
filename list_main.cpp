@@ -7,6 +7,8 @@ int main()
     int* data = NULL;
     int* next = NULL;
     int* prev = NULL;
+    list.next_free = 1;
+
 
     if ((data = (int*) calloc(LIST_LEN, sizeof(int))) != NULL) list.data = data;
     else return LIST_ERROR;
@@ -20,16 +22,14 @@ int main()
     prev_init(&list);
 
     push_index(&list, 10, 0);
-    print_data(&list, __LINE__);
     push_index(&list, 20, 0);
-    print_data(&list, __LINE__);
     push_index(&list, 30, 0);
-    print_data(&list, __LINE__);
     push_index(&list, 40, 0);
-    print_data(&list, __LINE__);
     push_index(&list, 35, 4);
+    push_number(&list, 99, 1);
+    
 
-    print_data(&list, __LINE__);
+    PRINT_DATA(&list);
 }
 
 //----------------------------------------------------------------------------

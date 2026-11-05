@@ -14,12 +14,12 @@ list_stat data_init(linked_list* list)
 //----------------------------------------------------------------------------
 list_stat next_init(linked_list* list)
 {
-    for (int i = 0; i < LIST_LEN; i++)
+    for (int i = 0; i < LIST_LEN - 1; i++)
     {
-        list -> next[i] = -1;
+        list -> next[i] = i + 1;
     }
 
-    list -> next[0] = 0;
+    list -> next[LIST_LEN - 1] = 0;
 
     return LIST_OK;
 }
@@ -32,8 +32,7 @@ list_stat prev_init(linked_list* list)
         list -> prev[i] = -1;
     }
 
-    list -> prev[0] = 0;
-    list -> prev[1] = 0;
+    //list -> prev[0] = -1;
 
     return LIST_OK;
 }
@@ -46,7 +45,10 @@ list_stat print_data(linked_list* list, int line)
 
     for (int i = 0; i < LIST_LEN; i++)
     {
-        printf("%-3d %-6d %-6d %-6d\n", i, list -> data[i], list -> next[i], list -> prev[i]);
+        printf("%-3d %-6d %-6d %-6d", i, list -> data[i], list -> next[i], list -> prev[i]);
+        if (i == list -> next_free)
+            printf("   <- next free");
+        printf("\n");
     }
     printf("\n");
 
@@ -54,11 +56,11 @@ list_stat print_data(linked_list* list, int line)
 }
 
 //----------------------------------------------------------------------------
-int search_free_index(linked_list* list)
+int search_free_index(linked_list* list)    //NOTE: относительно бесполезная функция
 {
     for (int i = 1; i < LIST_LEN; i++)
     {
-        if (list -> next[i] == -1)
+        if (list -> prev[i] == -1)
         {
             return i;
         }
@@ -71,20 +73,27 @@ int search_free_index(linked_list* list)
 list_stat push_number(linked_list* list, int value, int number)            //добавление элемента по порядковому номеру в связях
 {
     int i = 0;
-    while (list -> next[i] != number) i++;
+    for (int k = 0; k < number - 1; k++)
+    {
+        i = list -> next[i];
+        if (i == 0)
+            return LIST_ERROR;
+    }
 
-    push_index(list, value, ++i);
-
-    return LIST_OK;
+    return push_index(list, value, list -> next[i]);
 }
 
 //----------------------------------------------------------------------------
 list_stat push_index(linked_list* list, int value, int index)               //добавление эл-та по индексу в массиве data
 {
-    int free_i = search_free_index(list);
-    if (free_i == -1)
+    int free_i = list -> next_free;
+    if (free_i == 0)
+    {
+        printf(RED "ERROR: list is overfull. Addition is not possible\n" CRESET);
         return LIST_ERROR;
+    }
 
+    list -> next_free = list -> next[free_i];
     list -> data[free_i] = value;                   //запись нового значения в data
 
     list -> next[free_i] = index;                   //запись адреса для нового  эл-та в next
@@ -101,6 +110,9 @@ list_stat pop_index(linked_list* list, int* value, int index)               //у
 {
     *value = list -> data[index];
 
+    list -> next[index] = list -> next_free;
+    list -> next_free = list -> next[index];
+
     list -> next[list -> prev[index]] = list -> next[index];
 
     list -> prev[list -> next[index]] = list -> prev[index];
@@ -111,3 +123,5 @@ list_stat pop_index(linked_list* list, int* value, int index)               //у
 
     return LIST_OK;
 }
+
+//TODO: system (...)

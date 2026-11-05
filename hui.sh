@@ -1,0 +1,1 @@
+g++ list_main.cpp list.cpp -o list.out
