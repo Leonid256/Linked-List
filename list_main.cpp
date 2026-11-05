@@ -4,13 +4,13 @@
 int main()
 {
     linked_list list = {};
-    int* data = NULL;
+    etype_t* data = NULL;
     int* next = NULL;
     int* prev = NULL;
     list.next_free = 1;
 
 
-    if ((data = (int*) calloc(LIST_LEN, sizeof(int))) != NULL) list.data = data;
+    if ((data = (etype_t*) calloc(LIST_LEN, sizeof(int))) != NULL) list.data = data;
     else return LIST_ERROR;
     if ((next = (int*) calloc(LIST_LEN, sizeof(int))) != NULL) list.next = next;
     else return LIST_ERROR;
@@ -21,12 +21,17 @@ int main()
     next_init(&list);
     prev_init(&list);
 
+    etype_t value = 0;
     push_index(&list, 10, 0);
-    push_index(&list, 20, 0);
-    push_index(&list, 30, 0);
-    push_index(&list, 40, 0);
+    push_index(&list, 20, 1);
+    push_index(&list, 30, 2);
+    push_index(&list, 40, 3);
     push_index(&list, 35, 4);
     push_number(&list, 99, 1);
+    push_first(&list, 52);
+    pop_last(&list, &value);
+    
+    printf("%d\n", value);
     
 
     PRINT_DATA(&list);

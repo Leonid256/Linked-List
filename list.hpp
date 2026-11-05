@@ -6,6 +6,7 @@
 
 #include "colours.hpp"
 
+typedef int etype_t;
 //----------------------------------------------------------------------------
 const int POIZON_VALUE = 676767;
 const int LIST_LEN = 10;
@@ -13,7 +14,7 @@ const int LIST_LEN = 10;
 //----------------------------------------------------------------------------
 struct linked_list
 {
-    int* data;
+    etype_t* data;
     int* next;
     int* prev;
     int next_free;
@@ -31,9 +32,14 @@ list_stat prev_init(linked_list* list);
 list_stat next_init(linked_list* list);
 list_stat print_data(linked_list* list, int line);
 
-list_stat push_number(linked_list* list, int value, int number);
-list_stat push_index(linked_list* list, int value, int index);
-list_stat pop_index(linked_list* list, int* value, int index);
+list_stat push_number(linked_list* list, etype_t value, int number);
+list_stat push_index(linked_list* list, etype_t value, int index);
+list_stat pop_index(linked_list* list, etype_t* value, int index);
+
+list_stat push_first(linked_list* list, etype_t value);
+list_stat push_last(linked_list* list, etype_t value);
+list_stat pop_first(linked_list* list, etype_t* value);
+list_stat pop_last(linked_list* list, etype_t* value);
 
 //----------------------------------------------------------------------------
 #define PRINT_DATA(list) print_data(list, __LINE__) 
