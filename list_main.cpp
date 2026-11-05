@@ -5,8 +5,8 @@ int main()
 {
     linked_list list = {};
     etype_t* data = NULL;
-    int* next = NULL;
-    int* prev = NULL;
+    int* next     = NULL;
+    int* prev     = NULL;
     list.next_free = 1;
 
 
@@ -30,7 +30,7 @@ int main()
     push_number(&list, 99, 1);
     push_first(&list, 52);
     pop_last(&list, &value);
-    
+
     printf("%d\n", value);
     
 
