@@ -42,8 +42,11 @@ list_stat push_last(linked_list* list, etype_t value);
 list_stat pop_first(linked_list* list, etype_t* value);
 list_stat pop_last(linked_list* list, etype_t* value);
 
+void graphic_dump(void);
+
 //graph
 FILE* open_graph_file(void);
+void close_graph_file(FILE* file);
 void gener_elem(linked_list* list, int index, FILE* file, const char* colour);
 void generator(linked_list* list, FILE* file);
 void generator_headlines(FILE* file);

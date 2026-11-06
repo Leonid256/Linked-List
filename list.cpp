@@ -178,5 +178,9 @@ list_stat pop_last(linked_list* list, etype_t* value)       //pop с после�
     return pop_index(list, value, index);
 }
 
-
-//TODO: system (...)
+//----------------------------------------------------------------------------
+void graphic_dump(void)
+{
+    system("./graph_hui.sh");
+    system("open graph.png");
+}

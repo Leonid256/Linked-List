@@ -7,6 +7,12 @@ FILE* open_graph_file(void)
 }
 
 //----------------------------------------------------------------------------
+void close_graph_file(FILE* file)
+{
+    fclose(file);
+}
+
+//----------------------------------------------------------------------------
 void gener_elem(linked_list* list, int index, FILE* file, const char* colour)
 {
     fprintf(file, "\tnode_%d [style=filled, fillcolor=%s, label=", index, colour);

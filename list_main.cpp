@@ -40,7 +40,10 @@ int main()
 
     generator(&list, graph_file);
 
+    close_graph_file(graph_file);
+
     PRINT_DATA(&list);
+    graphic_dump();
 }
 
 //----------------------------------------------------------------------------
