@@ -4,9 +4,9 @@
 int main()
 {
     linked_list list = {};
-    etype_t* data = NULL;
-    int* next     = NULL;
-    int* prev     = NULL;
+    etype_t* data  = NULL;
+    int* next      = NULL;
+    int* prev      = NULL;
     list.data_size = 0;
     list.next_free = 1;
     list.free_size = LIST_LEN - 1;
