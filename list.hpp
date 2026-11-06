@@ -16,9 +16,11 @@ const char* const GRAPH_FILE = "graph.dot";
 struct linked_list
 {
     etype_t* data;
+    size_t data_size;
     int* next;
     int* prev;
     int next_free;
+    size_t free_size;
 };
 
 enum list_stat
@@ -41,14 +43,16 @@ list_stat push_first(linked_list* list, etype_t value);
 list_stat push_last(linked_list* list, etype_t value);
 list_stat pop_first(linked_list* list, etype_t* value);
 list_stat pop_last(linked_list* list, etype_t* value);
+list_stat list_verify(linked_list* list);
 
-void graphic_dump(void);
+void call_graphic_dump(void);
+list_stat graph_dump(linked_list* list, FILE* graph_file, int line);
 
 //graph
 FILE* open_graph_file(void);
 void close_graph_file(FILE* file);
 void gener_elem(linked_list* list, int index, FILE* file, const char* colour);
-void generator(linked_list* list, FILE* file);
+void generator(linked_list* list, FILE* file, int line);
 void generator_headlines(FILE* file);
 void gen_cnct_headlines(linked_list* list, FILE* file);
 void gen_nodes(linked_list* list, FILE* file);
@@ -56,6 +60,7 @@ void gen_lines(linked_list* list, FILE* file);
 
 //----------------------------------------------------------------------------
 #define PRINT_DATA(list) print_data(list, __LINE__) 
+#define GRAPH_DUMP(list, graph_file) graph_dump(list, graph_file, __LINE__)
 
 //----------------------------------------------------------------------------
 #endif

@@ -76,7 +76,12 @@ list_stat push_number(linked_list* list, etype_t value, int number)            /
 {
     if (number >= LIST_LEN || number < 0)
     {
-        printf(RED "Error: attempt to pop by the wrong number\n" CRESET);
+        printf(RED "Error: attempt to push by the wrong number\n" CRESET);
+        return LIST_ERROR;
+    }
+    else if (list -> free_size <= 0)
+    {
+        printf(RED "Error: attempt to push in overfull list\n" CRESET);
         return LIST_ERROR;
     }
 
@@ -95,7 +100,7 @@ list_stat push_number(linked_list* list, etype_t value, int number)            /
 list_stat push_index(linked_list* list, etype_t value, int index)               //добавление эл-та по индексу в массиве data
 {
     int free_i = list -> next_free;
-    if (free_i == 0)
+    if (free_i == 0 || list -> free_size <= 0)
     {
         printf(RED "ERROR: list is overfull. Addition is not possible\n" CRESET);
         return LIST_ERROR;
@@ -115,6 +120,9 @@ list_stat push_index(linked_list* list, etype_t value, int index)               
     list -> prev[list -> next[index]]  = free_i;
     list -> next[index] = free_i;
 
+    list -> free_size--;
+    list -> data_size++;
+
     return LIST_OK;
 }
 
@@ -126,7 +134,7 @@ list_stat pop_index(linked_list* list, etype_t* value, int index)               
         printf(RED "Error: attempt to pop the first(special) element\n" CRESET);
         return LIST_ERROR;
     }
-    else if (index >= LIST_LEN || index < 0)
+    else if (index >= LIST_LEN || index < 0 || list -> data_size <= 1)
     {
         printf(RED "Error: attempt to pop by the wrong index\n" CRESET);
         return LIST_ERROR;
@@ -142,6 +150,9 @@ list_stat pop_index(linked_list* list, etype_t* value, int index)               
     list -> data[index] = POIZON_VALUE;
 
     list -> next_free = index;
+
+    list -> free_size++;
+    list -> data_size--;
 
     return LIST_OK;
 }
@@ -179,7 +190,76 @@ list_stat pop_last(linked_list* list, etype_t* value)       //pop с после�
 }
 
 //----------------------------------------------------------------------------
-void graphic_dump(void)
+list_stat list_verify(linked_list* list)
+{
+    if (list -> next == NULL || list -> prev == NULL || list -> data == NULL)
+    {
+        printf(RED "Error in verify: list ptr = NULL\n" CRESET);
+        return LIST_ERROR;
+    }
+    if (list -> data_size + list -> free_size + 1 != LIST_LEN)
+    {
+        printf(RED "Error in verify: data_size + free_size != LIST_LEN\n" CRESET);
+        return LIST_ERROR;
+    }
+
+    //проверка закольцованности data
+    bool ring_check = false;
+    int current = 0;
+    for (size_t i = 0; i < LIST_LEN; i++)
+    {
+        int nxt = list -> next[current];
+        if (nxt < 0 || nxt >= LIST_LEN)     break;
+        if (list -> prev[nxt] != current)   break;
+        if (nxt == 0)
+        {
+            ring_check = true;
+            if (i != list -> data_size)
+            {
+                printf(RED "Error in verify: data size is wrong(data = %zu || data_size = %zu)\n" CRESET, i, list -> data_size);
+                return LIST_ERROR;
+            }
+            break;
+        }
+        current = nxt;
+    }
+    if (!ring_check)
+    {
+        printf(RED "Error in verify: data not linked\n" CRESET);
+        return LIST_ERROR;
+    }
+
+    //проверка связей free
+    bool free_check = false;
+    current = 0;
+    for (size_t i = 1; i < LIST_LEN; i++)
+    {
+        int nxt = list -> next[current];
+        if (nxt < 0 || nxt >= LIST_LEN)     break;
+        if (nxt == 0)
+        {
+            free_check = true;
+            if (i != list -> free_size)
+            {
+                printf(RED "Error in verify: free size is wrong(free = %zu || free_size = %zu)\n" CRESET, i, list -> free_size);
+                return LIST_ERROR;
+            }
+            break;
+        }
+        current = nxt;
+    }
+    if (!free_check)
+    {
+        printf(RED "Error in verify: free not linked\n" CRESET);
+        return LIST_ERROR;
+    }
+
+    printf(GRN "List verify finished with no errors\n" CRESET);
+    return LIST_OK;
+}
+
+//----------------------------------------------------------------------------
+void call_graphic_dump(void)
 {
     system("./graph_hui.sh");
     system("open graph.png");

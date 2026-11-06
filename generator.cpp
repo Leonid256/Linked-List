@@ -15,31 +15,37 @@ void close_graph_file(FILE* file)
 //----------------------------------------------------------------------------
 void gener_elem(linked_list* list, int index, FILE* file, const char* colour)
 {
-    fprintf(file, "\tnode_%d [style=filled, fillcolor=%s, label=", index, colour);
-    fprintf(file, "\"{INDEX=%d | DATA=%d | {NEXT=%d | PREV=%d}}\"];\n", index,
+    fprintf(file, "\tnode_%d [style = filled, fillcolor = %s, label = ", index, colour);
+    fprintf(file, "\"{INDEX = %d | DATA = %d | {NEXT = %d | PREV = %d}}\"];\n", index,
                 list -> data[index], list -> next[index], list -> prev[index]);
 }
 
 //----------------------------------------------------------------------------
-void generator(linked_list* list, FILE* file)
+void generator(linked_list* list, FILE* file, int line)
 {
     fprintf(file, "//Автоматически сгенерированный файл. Не править руками!\n");
     fprintf(file, "digraph G\n{\n");
-    fprintf(file, "\trankdir=TB;\n");
-    fprintf(file, "\tsplines=ortho;\n");
-    fprintf(file, "\tnodesep=0.8;\n\tsize=\"12,7!\";\n\tdpi=150;\n");
-    fprintf(file, "\tnode [shape=record, width=2.2, height=0.7];\n");
+
+    //заголовок (сверху, слева)
+    fprintf(file, "\tlabel = \"Graph dump in %d line\\n\\n\\n\\n\";\n", line);
+    fprintf(file, "\tlabelloc = t;\n");
+    fprintf(file, "\tfontsize = 24; labeljust = l;\n");
+
+    fprintf(file, "\trankdir = TB;\n");
+    fprintf(file, "\tsplines = ortho;\n");
+    fprintf(file, "\tnodesep = 0.8;\n\tsize = \"12,7!\";\n\tdpi = 150;\n");
+    fprintf(file, "\tnode [shape = record, width = 2.2, height = 0.7];\n");
 
     gen_nodes(list, file);
 
     //порядок по индексам(а не по связям)
-    fprintf(file, "\t{ rank=same;");
+    fprintf(file, "\t{ rank = same;");
     for (int i = 0; i < LIST_LEN; i++)
         fprintf(file, " node_%d;", i);
     fprintf(file, " }\n");
 
     for (int i = 0; i < LIST_LEN - 1; i++)
-        fprintf(file, "\tnode_%d -> node_%d [style=invis];\n", i, i + 1);
+        fprintf(file, "\tnode_%d -> node_%d [style = invis];\n", i, i + 1);
 
     
     //Заголовки
@@ -57,10 +63,10 @@ void generator(linked_list* list, FILE* file)
 //----------------------------------------------------------------------------
 void generator_headlines(FILE* file)
 {
-    fprintf(file, "\tlabel_0 [style=filled, fillcolor=lightpink, label = \"ZERO\"];\n");
-    fprintf(file, "\tlabel_free [style=filled, fillcolor=lightblue, label = \"next free\"];\n");
-    fprintf(file, "\tlabel_head [style=filled, fillcolor=cornsilk, label = \"head\"];\n");
-    fprintf(file, "\tlabel_tail [style=filled, fillcolor=papayawhip, label = \"tail\"];\n");
+    fprintf(file, "\tlabel_0 [style = filled, fillcolor = lightpink, label = \"ZERO\"];\n");
+    fprintf(file, "\tlabel_free [style = filled, fillcolor = lightblue, label = \"next free\"];\n");
+    fprintf(file, "\tlabel_head [style = filled, fillcolor = cornsilk, label = \"head\"];\n");
+    fprintf(file, "\tlabel_tail [style = filled, fillcolor = papayawhip, label = \"tail\"];\n");
 }
 
 //----------------------------------------------------------------------------
@@ -97,13 +103,26 @@ void gen_lines(linked_list* list, FILE* file)
         int i_2 = list -> next[i];
         if ((list -> next[i_1]) == i_2 && i_1 == (list -> prev[i_2]))
         {
-            fprintf(file, "\tnode_%d -> node_%d [dir=both, splines=ortho, constraint=false];\n", i_1, i_2);
+            fprintf(file, "\tnode_%d -> node_%d [dir = both, splines = ortho, constraint = false];\n", i_1, i_2);
         }
         else if ((list -> next[i_1]) == i_2 && i_2 != 0)
         {
-            fprintf(file, "\tnode_%d -> node_%d;\n", i_1, i_2);
+            fprintf(file, "\tnode_%d -> node_%d [color = green];\n", i_1, i_2);
         }
     }
+}
+
+//----------------------------------------------------------------------------
+list_stat graph_dump(linked_list* list, FILE* graph_file, int line)
+{
+    if ((graph_file = open_graph_file()) == NULL)
+        return LIST_ERROR;
+
+    generator(list, graph_file, line);
+
+    close_graph_file(graph_file);
+
+    return LIST_OK;
 }
 
 //----------------------------------------------------------------------------

@@ -7,7 +7,9 @@ int main()
     etype_t* data = NULL;
     int* next     = NULL;
     int* prev     = NULL;
+    list.data_size = 0;
     list.next_free = 1;
+    list.free_size = LIST_LEN - 1;
 
 
     if ((data = (etype_t*) calloc(LIST_LEN, sizeof(int))) != NULL) list.data = data;
@@ -30,20 +32,19 @@ int main()
     push_number(&list, 99, 1);
     push_first(&list, 52);
     pop_last(&list, &value);
-    //pop_index(&list, &value, -1);
+    pop_index(&list, &value, -1);
+    pop_index(&list, &value, 2);
+    pop_index(&list, &value, 3);
 
-    //printf("%d\n", value);
+    printf("%d\n", value);
+
+    list_verify(&list);
     
     FILE* graph_file = NULL;
-    if ((graph_file = open_graph_file()) == NULL)
-        return LIST_ERROR;
-
-    generator(&list, graph_file);
-
-    close_graph_file(graph_file);
+    GRAPH_DUMP(&list, graph_file);
 
     PRINT_DATA(&list);
-    graphic_dump();
+    //call_graphic_dump();
 }
 
 //----------------------------------------------------------------------------
