@@ -46,6 +46,10 @@ list_stat pop_last(linked_list* list, etype_t* value);
 FILE* open_graph_file(void);
 void gener_elem(linked_list* list, int index, FILE* file, const char* colour);
 void generator(linked_list* list, FILE* file);
+void generator_headlines(FILE* file);
+void gen_cnct_headlines(linked_list* list, FILE* file);
+void gen_nodes(linked_list* list, FILE* file);
+void gen_lines(linked_list* list, FILE* file);
 
 //----------------------------------------------------------------------------
 #define PRINT_DATA(list) print_data(list, __LINE__) 

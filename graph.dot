@@ -4,6 +4,8 @@ digraph G
 	rankdir=TB;
 	splines=ortho;
 	nodesep=0.8;
+	size="12,7!";
+	dpi=150;
 	node [shape=record, width=2.2, height=0.7];
 	node_0 [style=filled, fillcolor=lightpink, label="{INDEX=0 | DATA=676767 | {NEXT=7 | PREV=4}}"];
 	node_1 [style=filled, fillcolor=lightgrey, label="{INDEX=1 | DATA=10 | {NEXT=6 | PREV=7}}"];

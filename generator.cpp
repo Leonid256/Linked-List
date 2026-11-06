@@ -21,20 +21,10 @@ void generator(linked_list* list, FILE* file)
     fprintf(file, "digraph G\n{\n");
     fprintf(file, "\trankdir=TB;\n");
     fprintf(file, "\tsplines=ortho;\n");
-    fprintf(file, "\tnodesep=0.8;\n");
+    fprintf(file, "\tnodesep=0.8;\n\tsize=\"12,7!\";\n\tdpi=150;\n");
     fprintf(file, "\tnode [shape=record, width=2.2, height=0.7];\n");
 
-    for (int i = 0; i < LIST_LEN; i++)
-    {
-        const char* colour = "lightgrey";
-        if (i == 0) colour = "lightpink";
-        else if (i == list -> next_free) colour = "lightblue";
-        else if (list -> prev[i] == -1) colour = "lightgreen";
-        else if (i == list -> next[0]) colour = "cornsilk";
-        else if (i == list -> prev[0]) colour = "papayawhip";
-
-        gener_elem(list, i, file, colour);
-    }
+    gen_nodes(list, file);
 
     //порядок по индексам(а не по связям)
     fprintf(file, "\t{ rank=same;");
@@ -47,11 +37,54 @@ void generator(linked_list* list, FILE* file)
 
     
     //Заголовки
+    generator_headlines(file);
+
+    //Связи элементов
+    gen_lines(list, file);
+
+    //Связи с заголовками
+    gen_cnct_headlines(list, file);
+
+    fprintf(file, "}\n");
+}
+
+//----------------------------------------------------------------------------
+void generator_headlines(FILE* file)
+{
     fprintf(file, "\tlabel_0 [style=filled, fillcolor=lightpink, label = \"ZERO\"];\n");
     fprintf(file, "\tlabel_free [style=filled, fillcolor=lightblue, label = \"next free\"];\n");
     fprintf(file, "\tlabel_head [style=filled, fillcolor=cornsilk, label = \"head\"];\n");
     fprintf(file, "\tlabel_tail [style=filled, fillcolor=papayawhip, label = \"tail\"];\n");
+}
 
+//----------------------------------------------------------------------------
+void gen_cnct_headlines(linked_list* list, FILE* file)
+{
+    fprintf(file, "\tlabel_0 -> node_0;\n");
+    fprintf(file, "\tlabel_free -> node_%d;\n", list -> next_free);
+    fprintf(file, "\tlabel_head -> node_%d;\n", list -> next[0]);
+    fprintf(file, "\tlabel_tail -> node_%d;\n", list -> prev[0]);
+}
+
+//----------------------------------------------------------------------------
+void gen_nodes(linked_list* list, FILE* file)
+{
+    for (int i = 0; i < LIST_LEN; i++)
+    {
+        const char* colour = "lightgrey";
+        if (i == 0) colour = "lightpink";
+        else if (i == list -> next_free) colour = "lightblue";
+        else if (list -> prev[i] == -1) colour = "lightgreen";
+        else if (i == list -> next[0]) colour = "cornsilk";
+        else if (i == list -> prev[0]) colour = "papayawhip";
+
+        gener_elem(list, i, file, colour);
+    }
+}
+
+//----------------------------------------------------------------------------
+void gen_lines(linked_list* list, FILE* file)
+{
     for (int i = 0; i < LIST_LEN; i++)
     {
         int i_1 = i;
@@ -65,14 +98,6 @@ void generator(linked_list* list, FILE* file)
             fprintf(file, "\tnode_%d -> node_%d;\n", i_1, i_2);
         }
     }
-
-    //связи с заголовками
-    fprintf(file, "\tlabel_0 -> node_0;\n");
-    fprintf(file, "\tlabel_free -> node_%d;\n", list -> next_free);
-    fprintf(file, "\tlabel_head -> node_%d;\n", list -> next[0]);
-    fprintf(file, "\tlabel_tail -> node_%d;\n", list -> prev[0]);
-
-    fprintf(file, "}\n");
 }
 
 //----------------------------------------------------------------------------
