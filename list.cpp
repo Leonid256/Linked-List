@@ -190,16 +190,16 @@ list_stat pop_last(linked_list* list, etype_t* value)       //pop с после�
 }
 
 //----------------------------------------------------------------------------
-list_stat list_verify(linked_list* list)
+list_stat list_verify(linked_list* list, int line)
 {
     if (list -> next == NULL || list -> prev == NULL || list -> data == NULL)
     {
-        printf(RED "Error in verify: list ptr = NULL\n" CRESET);
+        printf(RED "Error in verify in %d line: list ptr = NULL\n" CRESET, line);
         return LIST_ERROR;
     }
     if (list -> data_size + list -> free_size + 1 != LIST_LEN)
     {
-        printf(RED "Error in verify: data_size + free_size != LIST_LEN\n" CRESET);
+        printf(RED "Error in verify in %d line: data_size + free_size != LIST_LEN\n" CRESET, line);
         return LIST_ERROR;
     }
 
@@ -216,7 +216,8 @@ list_stat list_verify(linked_list* list)
             ring_check = true;
             if (i != list -> data_size)
             {
-                printf(RED "Error in verify: data size is wrong(data = %zu || data_size = %zu)\n" CRESET, i, list -> data_size);
+                printf(RED "Error in verify in %d line: data size is wrong\n" CRESET, line);
+                printf(RED "(data = %zu || data_size = %zu)\n" CRESET, i, list -> data_size);
                 return LIST_ERROR;
             }
             break;
@@ -225,7 +226,7 @@ list_stat list_verify(linked_list* list)
     }
     if (!ring_check)
     {
-        printf(RED "Error in verify: data not linked\n" CRESET);
+        printf(RED "Error in verify in %d line: data not linked\n" CRESET, line);
         return LIST_ERROR;
     }
 
@@ -241,7 +242,8 @@ list_stat list_verify(linked_list* list)
             free_check = true;
             if (i != list -> free_size)
             {
-                printf(RED "Error in verify: free size is wrong(free = %zu || free_size = %zu)\n" CRESET, i, list -> free_size);
+                printf(RED "Error in verify in %d line: free size is wrong\n" CRESET, line);
+                printf(RED "(free = %zu || free_size = %zu)\n" CRESET, i, list -> free_size);
                 return LIST_ERROR;
             }
             break;
@@ -250,11 +252,11 @@ list_stat list_verify(linked_list* list)
     }
     if (!free_check)
     {
-        printf(RED "Error in verify: free not linked\n" CRESET);
+        printf(RED "Error in verify in %d line: free not linked\n" CRESET, line);
         return LIST_ERROR;
     }
 
-    printf(GRN "List verify finished with no errors\n" CRESET);
+    printf(GRN "List verify finished with no errors in %d line\n" CRESET, line);
     return LIST_OK;
 }
 

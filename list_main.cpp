@@ -38,7 +38,7 @@ int main()
 
     printf("%d\n", value);
 
-    list_verify(&list);
+    LIST_VERIFY(&list);
     
     FILE* graph_file = NULL;
     GRAPH_DUMP(&list, graph_file);

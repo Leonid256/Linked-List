@@ -43,7 +43,7 @@ list_stat push_first(linked_list* list, etype_t value);
 list_stat push_last(linked_list* list, etype_t value);
 list_stat pop_first(linked_list* list, etype_t* value);
 list_stat pop_last(linked_list* list, etype_t* value);
-list_stat list_verify(linked_list* list);
+list_stat list_verify(linked_list* list, int line);
 
 void call_graphic_dump(void);
 list_stat graph_dump(linked_list* list, FILE* graph_file, int line);
@@ -61,6 +61,7 @@ void gen_lines(linked_list* list, FILE* file);
 //----------------------------------------------------------------------------
 #define PRINT_DATA(list) print_data(list, __LINE__) 
 #define GRAPH_DUMP(list, graph_file) graph_dump(list, graph_file, __LINE__)
+#define LIST_VERIFY(list) list_verify(list, __LINE__)
 
 //----------------------------------------------------------------------------
 #endif
