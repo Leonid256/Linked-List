@@ -1,0 +1,45 @@
+//Автоматически сгенерированный файл. Не править руками!
+digraph G
+{
+	rankdir=TB;
+	splines=ortho;
+	nodesep=0.8;
+	node [shape=record, width=2.2, height=0.7];
+	node_0 [style=filled, fillcolor=lightpink, label="{INDEX=0 | DATA=676767 | {NEXT=7 | PREV=4}}"];
+	node_1 [style=filled, fillcolor=lightgrey, label="{INDEX=1 | DATA=10 | {NEXT=6 | PREV=7}}"];
+	node_2 [style=filled, fillcolor=lightgrey, label="{INDEX=2 | DATA=20 | {NEXT=3 | PREV=6}}"];
+	node_3 [style=filled, fillcolor=lightgrey, label="{INDEX=3 | DATA=30 | {NEXT=4 | PREV=2}}"];
+	node_4 [style=filled, fillcolor=papayawhip, label="{INDEX=4 | DATA=40 | {NEXT=0 | PREV=3}}"];
+	node_5 [style=filled, fillcolor=lightblue, label="{INDEX=5 | DATA=676767 | {NEXT=8 | PREV=-1}}"];
+	node_6 [style=filled, fillcolor=lightgrey, label="{INDEX=6 | DATA=99 | {NEXT=2 | PREV=1}}"];
+	node_7 [style=filled, fillcolor=cornsilk, label="{INDEX=7 | DATA=52 | {NEXT=1 | PREV=0}}"];
+	node_8 [style=filled, fillcolor=lightgreen, label="{INDEX=8 | DATA=676767 | {NEXT=9 | PREV=-1}}"];
+	node_9 [style=filled, fillcolor=lightgreen, label="{INDEX=9 | DATA=676767 | {NEXT=0 | PREV=-1}}"];
+	{ rank=same; node_0; node_1; node_2; node_3; node_4; node_5; node_6; node_7; node_8; node_9; }
+	node_0 -> node_1 [style=invis];
+	node_1 -> node_2 [style=invis];
+	node_2 -> node_3 [style=invis];
+	node_3 -> node_4 [style=invis];
+	node_4 -> node_5 [style=invis];
+	node_5 -> node_6 [style=invis];
+	node_6 -> node_7 [style=invis];
+	node_7 -> node_8 [style=invis];
+	node_8 -> node_9 [style=invis];
+	label_0 [style=filled, fillcolor=lightpink, label = "ZERO"];
+	label_free [style=filled, fillcolor=lightblue, label = "next free"];
+	label_head [style=filled, fillcolor=cornsilk, label = "head"];
+	label_tail [style=filled, fillcolor=papayawhip, label = "tail"];
+	node_0 -> node_7 [dir=both, splines=ortho, constraint=false];
+	node_1 -> node_6 [dir=both, splines=ortho, constraint=false];
+	node_2 -> node_3 [dir=both, splines=ortho, constraint=false];
+	node_3 -> node_4 [dir=both, splines=ortho, constraint=false];
+	node_4 -> node_0 [dir=both, splines=ortho, constraint=false];
+	node_5 -> node_8;
+	node_6 -> node_2 [dir=both, splines=ortho, constraint=false];
+	node_7 -> node_1 [dir=both, splines=ortho, constraint=false];
+	node_8 -> node_9;
+	label_0 -> node_0;
+	label_free -> node_5;
+	label_head -> node_7;
+	label_tail -> node_4;
+}

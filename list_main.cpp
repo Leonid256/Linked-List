@@ -30,10 +30,15 @@ int main()
     push_number(&list, 99, 1);
     push_first(&list, 52);
     pop_last(&list, &value);
-    pop_index(&list, &value, -1);
+    //pop_index(&list, &value, -1);
 
-    printf("%d\n", value);
+    //printf("%d\n", value);
     
+    FILE* graph_file = NULL;
+    if ((graph_file = open_graph_file()) == NULL)
+        return LIST_ERROR;
+
+    generator(&list, graph_file);
 
     PRINT_DATA(&list);
 }

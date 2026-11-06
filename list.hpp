@@ -10,6 +10,7 @@ typedef int etype_t;
 //----------------------------------------------------------------------------
 const int POIZON_VALUE = 676767;
 const int LIST_LEN = 10;
+const char* const GRAPH_FILE = "graph.dot";
 
 //----------------------------------------------------------------------------
 struct linked_list
@@ -40,6 +41,11 @@ list_stat push_first(linked_list* list, etype_t value);
 list_stat push_last(linked_list* list, etype_t value);
 list_stat pop_first(linked_list* list, etype_t* value);
 list_stat pop_last(linked_list* list, etype_t* value);
+
+//graph
+FILE* open_graph_file(void);
+void gener_elem(linked_list* list, int index, FILE* file, const char* colour);
+void generator(linked_list* list, FILE* file);
 
 //----------------------------------------------------------------------------
 #define PRINT_DATA(list) print_data(list, __LINE__) 
