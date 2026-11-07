@@ -1,5 +1,7 @@
 #include "list.hpp"
 
+int G_global_counter = 0;
+
 //----------------------------------------------------------------------------
 list_stat data_init(linked_list* list)
 {
@@ -48,7 +50,7 @@ list_stat print_data(linked_list* list, int line)
     for (int i = 0; i < LIST_LEN; i++)
     {
         printf("%-3d %-6d %-6d %-6d", i, list -> data[i], list -> next[i], list -> prev[i]);
-        if (i == list -> next_free)
+        if (i == list -> first_free)
             printf("   <- next free");
         printf("\n");
     }
@@ -99,7 +101,7 @@ list_stat push_number(linked_list* list, etype_t value, int number)            /
 //----------------------------------------------------------------------------
 list_stat push_index(linked_list* list, etype_t value, int index)               //добавление эл-та по индексу в массиве data
 {
-    int free_i = list -> next_free;
+    int free_i = list -> first_free;
     if (free_i == 0 || list -> free_size <= 0)
     {
         printf(RED "ERROR: list is overfull. Addition is not possible\n" CRESET);
@@ -111,7 +113,7 @@ list_stat push_index(linked_list* list, etype_t value, int index)               
         return LIST_ERROR;
     }
 
-    list -> next_free = list -> next[free_i];
+    list -> first_free = list -> next[free_i];
     list -> data[free_i] = value;
 
     list -> prev[free_i] = index;
@@ -145,11 +147,11 @@ list_stat pop_index(linked_list* list, etype_t* value, int index)               
     list -> next[list -> prev[index]] = list -> next[index];
     list -> prev[list -> next[index]] = list -> prev[index];
 
-    list -> next[index] = list -> next_free;
+    list -> next[index] = list -> first_free;
     list -> prev[index] = -1;
     list -> data[index] = POIZON_VALUE;
 
-    list -> next_free = index;
+    list -> first_free = index;
 
     list -> free_size++;
     list -> data_size--;
@@ -256,7 +258,7 @@ list_stat list_verify(linked_list* list, int line)
         return LIST_ERROR;
     }
 
-    printf(GRN "List verify finished with no errors in %d line\n" CRESET, line);
+    printf("List verify finished with no errors in %d line\n", line);
     return LIST_OK;
 }
 
@@ -266,3 +268,19 @@ void call_graphic_dump(void)
     system("./graph_hui.sh");
     system("open graph.png");
 }
+
+//----------------------------------------------------------------------------
+void list_free(linked_list* list)
+{
+    free(list -> data);
+    free(list -> prev);
+    free(list -> next);
+
+    list -> data = NULL;
+    list -> prev = NULL;
+    list -> next = NULL;
+
+    list = NULL;
+}
+
+//----------------------------------------------------------------------------
