@@ -11,6 +11,7 @@ typedef int etype_t;
 //----------------------------------------------------------------------------
 const int POIZON_VALUE = 676767;
 const int LIST_LEN = 10;
+const int REALLOC_SСALE = 2;
 const char* const GRAPH_FILE = "graph.dot";
 
 extern int G_global_counter;
@@ -24,14 +25,22 @@ struct linked_list
     int* prev;
     int first_free;
     size_t free_size;
+    int list_size;
 };
 
 enum list_stat
 {
-    LIST_OK     = 0,
-    LIST_ERROR  = 1,
+    LIST_OK         = 0,
+    LIST_NULL_PTR   = 1,
+    LIST_LEN_ERR    = 2,
+    LIST_LINK_ERR   = 3,
+    LIST_FREE_ERR   = 4,
+    LIST_POP_ERR    = 5,
+    LIST_PUSH_ERR   = 6,
+    LIST_GRAPH_ERR  = 7,
+    LIST_REALC_ERR  = 8,
+    // LIST_ERROR  = 1,
 };
-//TODO: enum errors
 
 //----------------------------------------------------------------------------
 list_stat data_init(linked_list* list);
