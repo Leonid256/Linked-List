@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 
 #include "colours.hpp"
 
@@ -64,21 +65,21 @@ void call_graphic_dump(void);
 //graph
 FILE* open_graph_file(const char* const graph_file_name);
 void close_graph_file(FILE* file);
-void gener_elem(linked_list* list, int index, FILE* file, int line, const char* colour);
-void dump_generator(linked_list* list, FILE* file, int line);
+void gener_elem(linked_list* list, int index, FILE* file, int count, const char* colour);
+void dump_generator(linked_list* list, FILE* file, int count, int line);
 void dump_begin(FILE* file);
 void dump_end(FILE* file, int count);
-void generator_headlines(linked_list* list, FILE* file, int line);
-void gen_cnct_headlines(linked_list* list, FILE* file, int line);
-void gen_nodes(linked_list* list, FILE* file, int line);
-void gen_lines(linked_list* list, FILE* file, int line);
+void generator_headlines(linked_list* list, FILE* file, int count, int line);
+void gen_cnct_headlines(linked_list* list, FILE* file, int count);
+void gen_nodes(linked_list* list, FILE* file, int count);
+void gen_lines(linked_list* list, FILE* file, int count);
 
 //----------------------------------------------------------------------------
 #define PRINT_DATA(list) print_data(list, __LINE__) 
-#define DUMP_GENERATOR(list, file)              \
-{                                               \
-    G_global_counter++;                    \
-    dump_generator(list, file, G_global_counter);       \
+#define DUMP_GENERATOR(list, file)                          \
+{                                                           \
+    G_global_counter++;                                     \
+    dump_generator(list, file, G_global_counter, __LINE__); \
 }
 #define LIST_VERIFY(list) list_verify(list, __LINE__)
 

@@ -29,6 +29,8 @@ int main()
         return LIST_GRAPH_ERR;
     dump_begin(graph_file);
 
+    DUMP_GENERATOR(&list, graph_file);
+
     etype_t value = 0;
     push_index(&list, 10, 0);
     push_index(&list, 20, 1);
@@ -38,18 +40,20 @@ int main()
     push_number(&list, 99, 1);
     push_first(&list, 52);
     pop_last(&list, &value);
-    // pop_index(&list, &value, -1); //SECTION: error
+    // pop_index(&list, &value, -1); //SECTION: error(wrong index)
+    DUMP_GENERATOR(&list, graph_file);
     pop_index(&list, &value, 2);
     pop_index(&list, &value, 3);
-    push_index(&list, 30, 2);
-    push_index(&list, 40, 3);
+    // push_index(&list, 30, 2);    //SECTION: ERROR(wrong index)
+    // push_index(&list, 40, 3);    //SECTION: ERROR(wrong index)
     push_index(&list, 35, 4);
-    push_index(&list, 30, 2);
+    // push_index(&list, 30, 2);    //SECTION: ERROR(wrong index)
     push_index(&list, 40, 3);
     push_index(&list, 35, 4);
     
-    // list.next[1] = 7;   //SECTION: ERROR
-    // list.next[2] = 3;   //SECTION: ERROR
+    list.next[1] = 8;   //SECTION: ERROR(potential wrong linking)
+    list.next[2] = 3;   //SECTION: ERROR(potential wrong linking)
+    DUMP_GENERATOR(&list, graph_file);
 
     //printf("%d\n", value);
 
@@ -57,15 +61,15 @@ int main()
     
     DUMP_GENERATOR(&list, graph_file);
 
-    dump_end(graph_file, G_global_counter);
     //PRINT_DATA(&list);
     //TODO: realloc
     //TODO: errors dump
     //TODO: неск раз вывод в html картинку
 
-    //call_graphic_dump();
-
+    dump_end(graph_file, G_global_counter);
     close_graph_file(graph_file);
+    call_graphic_dump();
+
     list_free(&list);
 }
 

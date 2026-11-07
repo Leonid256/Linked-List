@@ -1,1 +1,1 @@
-neato -Tpng graph.dot -o graph.png
+neato -Tsvg graph.dot -o graph.svg

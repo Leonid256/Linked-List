@@ -292,7 +292,34 @@ list_stat list_verify(linked_list* list, int line)
 void call_graphic_dump(void)
 {
     system("./graph_hui.sh");
-    system("open graph.png");
+
+    FILE* html = fopen("graph.html", "w");
+    if (html == NULL) return;
+
+    fprintf(html,
+        "<!DOCTYPE html>\n<html lang=\"ru\">\n<head>\n<meta charset=\"utf-8\">\n"
+        "<title>List dump</title>\n"
+        "<style>body{font-family:sans-serif;margin:20px}"
+        ".wrap{overflow:auto}svg{width:100%%;height:auto}</style>\n"
+        "</head>\n<body>\n<div class=\"wrap\">\n");
+
+    FILE* svg = fopen("graph.svg", "r");
+    if (svg != NULL)
+    {
+        char buf[4096];
+        bool started = false;
+        while (fgets(buf, sizeof buf, svg))
+        {
+            if (!started && strstr(buf, "<svg")) started = true;   // пропускаем xml-заголовок и DOCTYPE
+            if (started) fputs(buf, html);
+        }
+        fclose(svg);
+    }
+
+    fprintf(html, "</div>\n</body>\n</html>\n");
+    fclose(html);
+
+    system("open graph.html");
 }
 
 //----------------------------------------------------------------------------
