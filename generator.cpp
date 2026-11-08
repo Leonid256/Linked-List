@@ -36,7 +36,8 @@ void dump_generator(linked_list* list, FILE* file, int count, int line)
 
     //порядок по индексам(а не по связям)
     for (int i = 0; i < list -> list_size; i++)
-        fprintf(file, " node_%d_%d;", i, count);
+        fprintf(file, "\tnode_%d_%d;", i, count);
+    fprintf(file, "\n");
     
     //Заголовки
     generator_headlines(list, file, count, line);

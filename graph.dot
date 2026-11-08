@@ -13,7 +13,8 @@ digraph G
 	node_7_1 [pos = "21,-6!", style = filled, fillcolor = lightgreen, label = "{INDEX = 7 | DATA = 676767 | {NEXT = 8 | PREV = -1}}"];
 	node_8_1 [pos = "24,-6!", style = filled, fillcolor = lightgreen, label = "{INDEX = 8 | DATA = 676767 | {NEXT = 9 | PREV = -1}}"];
 	node_9_1 [pos = "27,-6!", style = filled, fillcolor = lightgreen, label = "{INDEX = 9 | DATA = 676767 | {NEXT = 0 | PREV = -1}}"];
- node_0_1; node_1_1; node_2_1; node_3_1; node_4_1; node_5_1; node_6_1; node_7_1; node_8_1; node_9_1;	title_1 [shape = plaintext, fontsize = 24, pos = "1,-2.8!", label = "Graph dump 1(32 line)"];
+	node_0_1;	node_1_1;	node_2_1;	node_3_1;	node_4_1;	node_5_1;	node_6_1;	node_7_1;	node_8_1;	node_9_1;
+	title_1 [shape = plaintext, fontsize = 24, pos = "1,-2.8!", label = "Graph dump 1(32 line)"];
 	label_0_1 [width = 0.9, style = filled, fillcolor = lightpink, pos = "0,-4.4!", label = "ZERO"];
 	label_free_1 [width = 0.9, style = filled, fillcolor = lightgreen, pos = "3,-4.4!", label = "first free"];
 	label_head_1 [width = 0.9, style = filled, pos = "-1.0,-4.4!", label = "head"];
@@ -41,7 +42,8 @@ digraph G
 	node_7_2 [pos = "21,-12!", style = filled, fillcolor = lightgrey, label = "{INDEX = 7 | DATA = 52 | {NEXT = 6 | PREV = 1}}"];
 	node_8_2 [pos = "24,-12!", style = filled, fillcolor = lightgreen, label = "{INDEX = 8 | DATA = 676767 | {NEXT = 9 | PREV = -1}}"];
 	node_9_2 [pos = "27,-12!", style = filled, fillcolor = lightgreen, label = "{INDEX = 9 | DATA = 676767 | {NEXT = 0 | PREV = -1}}"];
- node_0_2; node_1_2; node_2_2; node_3_2; node_4_2; node_5_2; node_6_2; node_7_2; node_8_2; node_9_2;	title_2 [shape = plaintext, fontsize = 24, pos = "1,-8.8!", label = "Graph dump 2(44 line)"];
+	node_0_2;	node_1_2;	node_2_2;	node_3_2;	node_4_2;	node_5_2;	node_6_2;	node_7_2;	node_8_2;	node_9_2;
+	title_2 [shape = plaintext, fontsize = 24, pos = "1,-8.8!", label = "Graph dump 2(44 line)"];
 	label_0_2 [width = 0.9, style = filled, fillcolor = lightpink, pos = "0,-10.4!", label = "ZERO"];
 	label_free_2 [width = 0.9, style = filled, fillcolor = lightgreen, pos = "15,-10.4!", label = "first free"];
 	label_head_2 [width = 0.9, style = filled, pos = "2.0,-10.4!", label = "head"];
@@ -69,7 +71,8 @@ digraph G
 	node_7_3 [pos = "21,-18!", style = filled, fillcolor = lightgrey, label = "{INDEX = 7 | DATA = 52 | {NEXT = 6 | PREV = 1}}"];
 	node_8_3 [pos = "24,-18!", style = filled, fillcolor = lightgreen, label = "{INDEX = 8 | DATA = 676767 | {NEXT = 9 | PREV = -1}}"];
 	node_9_3 [pos = "27,-18!", style = filled, fillcolor = lightgreen, label = "{INDEX = 9 | DATA = 676767 | {NEXT = 0 | PREV = -1}}"];
- node_0_3; node_1_3; node_2_3; node_3_3; node_4_3; node_5_3; node_6_3; node_7_3; node_8_3; node_9_3;	title_3 [shape = plaintext, fontsize = 24, pos = "1,-14.8!", label = "Graph dump 3(56 line)"];
+	node_0_3;	node_1_3;	node_2_3;	node_3_3;	node_4_3;	node_5_3;	node_6_3;	node_7_3;	node_8_3;	node_9_3;
+	title_3 [shape = plaintext, fontsize = 24, pos = "1,-14.8!", label = "Graph dump 3(56 line)"];
 	label_0_3 [width = 0.9, style = filled, fillcolor = lightpink, pos = "0,-16.4!", label = "ZERO"];
 	label_free_3 [width = 0.9, style = filled, fillcolor = lightgreen, pos = "24,-16.4!", label = "first free"];
 	label_head_3 [width = 0.9, style = filled, pos = "2.0,-16.4!", label = "head"];
@@ -97,7 +100,8 @@ digraph G
 	node_7_4 [pos = "21,-24!", style = filled, fillcolor = lightgrey, label = "{INDEX = 7 | DATA = 52 | {NEXT = 6 | PREV = 1}}"];
 	node_8_4 [pos = "24,-24!", style = filled, fillcolor = lightgreen, label = "{INDEX = 8 | DATA = 676767 | {NEXT = 9 | PREV = -1}}"];
 	node_9_4 [pos = "27,-24!", style = filled, fillcolor = lightgreen, label = "{INDEX = 9 | DATA = 676767 | {NEXT = 0 | PREV = -1}}"];
- node_0_4; node_1_4; node_2_4; node_3_4; node_4_4; node_5_4; node_6_4; node_7_4; node_8_4; node_9_4;	title_4 [shape = plaintext, fontsize = 24, pos = "1,-20.8!", label = "Graph dump 4(62 line)"];
+	node_0_4;	node_1_4;	node_2_4;	node_3_4;	node_4_4;	node_5_4;	node_6_4;	node_7_4;	node_8_4;	node_9_4;
+	title_4 [shape = plaintext, fontsize = 24, pos = "1,-20.8!", label = "Graph dump 4(62 line)"];
 	label_0_4 [width = 0.9, style = filled, fillcolor = lightpink, pos = "0,-22.4!", label = "ZERO"];
 	label_free_4 [width = 0.9, style = filled, fillcolor = lightgreen, pos = "24,-22.4!", label = "first free"];
 	label_head_4 [width = 0.9, style = filled, pos = "2.0,-22.4!", label = "head"];

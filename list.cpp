@@ -310,7 +310,7 @@ void call_graphic_dump(void)
         bool started = false;
         while (fgets(buf, sizeof buf, svg))
         {
-            if (!started && strstr(buf, "<svg")) started = true;   // пропускаем xml-заголовок и DOCTYPE
+            if (!started && strstr(buf, "<svg")) started = true;
             if (started) fputs(buf, html);
         }
         fclose(svg);
