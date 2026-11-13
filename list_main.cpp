@@ -51,6 +51,7 @@ int main()
     push_index(&list, 40, 3);
     push_index(&list, 35, 4);
     
+    
     list.next[1] = 8;   //SECTION: ERROR(potential wrong linking)
     list.next[2] = 3;   //SECTION: ERROR(potential wrong linking)
     DUMP_GENERATOR(&list, graph_file);
@@ -59,7 +60,7 @@ int main()
 
     LIST_VERIFY(&list);
     
-    DUMP_GENERATOR(&list, graph_file);
+    // DUMP_GENERATOR(&list, graph_file);
 
     //PRINT_DATA(&list);
     //TODO: realloc

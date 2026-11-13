@@ -40,7 +40,6 @@ enum list_stat
     LIST_PUSH_ERR   = 6,
     LIST_GRAPH_ERR  = 7,
     LIST_REALC_ERR  = 8,
-    // LIST_ERROR  = 1,
 };
 
 //----------------------------------------------------------------------------
@@ -81,6 +80,7 @@ void gen_lines(linked_list* list, FILE* file, int count);
     G_global_counter++;                                     \
     dump_generator(list, file, G_global_counter, __LINE__); \
 }
+
 #define LIST_VERIFY(list) list_verify(list, __LINE__)
 
 //----------------------------------------------------------------------------
